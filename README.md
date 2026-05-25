@@ -119,22 +119,6 @@ Kolom turunan (`fasilitas`, `aksesibilitas`, `popularitas`) dibangkitkan secara 
 
 ---
 
-## 🤝 Kontribusi
 
-Kontribusi sangat terbuka! Silakan:
-
-1. Fork repositori ini
-2. Buat branch fitur: `git checkout -b fitur/nama-fitur`
-3. Commit perubahan: `git commit -m 'Menambahkan fitur X'`
-4. Push ke branch: `git push origin fitur/nama-fitur`
-5. Buat Pull Request
-
----
-
-## 📄 Lisensi
-
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
-
----
 
 > Dibuat untuk keperluan akademis — Sistem Pendukung Keputusan, Universitas/Prodi terkait.
