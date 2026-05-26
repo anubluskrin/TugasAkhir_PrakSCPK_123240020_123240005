@@ -368,18 +368,16 @@ elif halaman == "Hitung SPK":
 elif halaman == "Visualisasi":
     st.title("Visualisasi Data Analitik")
 
-    # Grafik 1: Distribusi Jenis Wisata
+    # Grafik 1: Distribusi Jenis Wisata (Line Plot)
     st.markdown("### 1. Distribusi Jenis Wisata")
     type_counts = df_raw["type"].value_counts()
 
     fig1, ax1 = plt.subplots(figsize=(10, 5))
-    colors_bar = plt.cm.Blues_r(np.linspace(0.3, 0.9, len(type_counts)))
-    bars = ax1.barh(type_counts.index, type_counts.values, color=colors_bar)
-    ax1.bar_label(bars, fmt="%d", padding=3, fontsize=9)
-    ax1.set_xlabel("Jumlah Destinasi", fontsize=11)
-    ax1.set_title("Distribusi Destinasi Wisata Yogyakarta per Jenis", fontsize=13, fontweight="bold")
-    ax1.invert_yaxis()
-    ax1.spines[["top", "right"]].set_visible(False)
+    ax1.plot(type_counts.index, type_counts.values, marker="o", color="steelblue", linewidth=2, markersize=6)
+    ax1.set_xlabel("Jenis Wisata", fontsize=11)
+    ax1.set_ylabel("Jumlah Destinasi", fontsize=11)
+    ax1.set_title("Distribusi Jenis Wisata", fontsize=13, fontweight="bold")
+    plt.xticks(rotation=45, ha="right", fontsize=9)
     plt.tight_layout()
     st.pyplot(fig1)
     plt.close()
@@ -424,17 +422,21 @@ elif halaman == "Visualisasi":
     st.pyplot(fig3)
     plt.close()
 
-    # Grafik 4: Popularitas
+    # Grafik 4: Popularitas (Pie Chart)
     st.markdown("### 4. Popularitas Destinasi")
-    fig4, ax4 = plt.subplots(figsize=(8, 4))
     popularitas_counts = df_raw["popularitas"].value_counts().sort_index()
-    ax4.bar(popularitas_counts.index, popularitas_counts.values,
-            color="#3b82f6", edgecolor="white", alpha=0.85)
-    ax4.set_xlabel("Skor Popularitas (1=Kurang Populer, 5=Populer)", fontsize=11)
-    ax4.set_ylabel("Jumlah Destinasi", fontsize=11)
-    ax4.set_title("Popularitas (C5) - 437 Destinasi",
-                  fontsize=13, fontweight="bold")
-    ax4.spines[["top", "right"]].set_visible(False)
+    labels = ["1 - Tidak Populer", "2 - Kurang Populer", "3 - Cukup Populer", "4 - Populer", "5 - Sangat Populer"]
+
+    fig4, ax4 = plt.subplots(figsize=(8, 8))
+    ax4.pie(
+        popularitas_counts.values,
+        labels=labels,
+        autopct="%1.1f%%",
+        startangle=90,
+        colors=plt.cm.Blues(np.linspace(0.3, 0.9, len(popularitas_counts))),
+        wedgeprops=dict(edgecolor="white", linewidth=1.2),
+    )
+    ax4.set_title("Popularitas (C5) - 437 Destinasi", fontsize=13, fontweight="bold")
     plt.tight_layout()
     st.pyplot(fig4)
     plt.close()
